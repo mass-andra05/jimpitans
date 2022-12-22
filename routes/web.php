@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,11 @@ Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin,petugas,bendahara']], function(){
     Route::get('/home', function () {
-        return view('dashboard');
+        return view('welcome');
     })->middleware('auth');
 
+    Route::resource('user', UserController::class);
+
+    route::get('/profil',[UserController::class,'profil'])->name('profil');   
+    Route::patch('/update-password', [UserController::class,'updatePassword'])->name('update-password'); 
 });
