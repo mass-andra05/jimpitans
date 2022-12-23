@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PemasukanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,petugas,bendahara']], fun
     })->middleware('auth');
 
     Route::resource('user', UserController::class);
+
+    Route::resource('pemasukan', PemasukanController::class);
+    Route::post('/pemasukan/status/{id}', [PemasukanController::class,'status']);
 
     route::get('/profil',[UserController::class,'profil'])->name('profil');   
     Route::patch('/update-password', [UserController::class,'updatePassword'])->name('update-password'); 
