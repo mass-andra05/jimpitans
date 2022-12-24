@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,petugas,bendahara']], fun
 
     Route::resource('pemasukan', PemasukanController::class);
     Route::post('/pemasukan/status/{id}', [PemasukanController::class,'status']);
+    Route::get('/pemasukan-export',[PemasukanController::class,'pemasukanExport'])->name('export-pemasukan'); 
 
     route::get('/profil',[UserController::class,'profil'])->name('profil');   
     Route::patch('/update-password', [UserController::class,'updatePassword'])->name('update-password'); 

@@ -15,6 +15,7 @@ class pemasukan extends Model
         'kategori',
         'tanggal',
         'jumlah',
+        'user',
         'status',
     ];
 }

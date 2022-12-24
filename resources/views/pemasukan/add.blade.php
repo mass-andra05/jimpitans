@@ -27,6 +27,13 @@
                         placeholder="Input..." required>
                 </div>
                 <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">User</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="user"
+                        value="{{ auth()->user()->name }}" required disabled>
+                    <input type="hidden" class="form-control" id="exampleFormControlInput1" name="user"
+                        value="{{ auth()->user()->name }}" required>
+                </div>
+                <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Nominal Pemasukan</label>
                     <input type="number" class="form-control" name="jumlah" id="exampleFormControlInput1"
                         placeholder="Input..." required>

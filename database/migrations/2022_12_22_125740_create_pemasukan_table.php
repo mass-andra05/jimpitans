@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->string('kategori');
             $table->date('tanggal');
+            $table->string('user');
             $table->integer('jumlah');
             $table->string('status')->nullable();
             $table->timestamps();

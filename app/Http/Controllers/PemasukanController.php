@@ -6,6 +6,9 @@ use App\Models\pemasukan;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorepemasukanRequest;
 use App\Http\Requests\UpdatepemasukanRequest;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+use App\Exports\pemasukanExport;
 
 class PemasukanController extends Controller
 {
@@ -16,8 +19,7 @@ class PemasukanController extends Controller
      */
     public function index(Request $request)
     {
-        $pemasukan['q'] = $request->q;
-        return view('pemasukan.index',$pemasukan, [
+        return view('pemasukan.index',[
             'title' => "Daftar Pemasukan",
             'pemasukans' => pemasukan::latest()->get()
         ]);
@@ -49,6 +51,7 @@ class PemasukanController extends Controller
             'kategori' => 'required|max:255',
             'tanggal' => 'required|max:255',
             'jumlah' => 'required|max:255',
+            'user' => 'required|max:255',
             'status',
         ]);
         
@@ -103,6 +106,7 @@ class PemasukanController extends Controller
             'kategori' => 'required|max:255',
             'tanggal' => 'required|max:255',
             'jumlah' => 'required|max:255',
+            'user' => 'required|max:255',
             'status',
         ];
 
@@ -138,5 +142,9 @@ class PemasukanController extends Controller
         $pemasukan->update();
 
         return redirect('/pemasukan')->with('success', 'Anda Berhasil Mengkonfimasi');
+    }
+
+    public function pemasukanExport(){
+        return Excel::download(new pemasukanExport, 'Pemasukan.xlsx');
     }
 }

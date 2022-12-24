@@ -14,7 +14,7 @@
                 <button type="button" class="btn btn-success mb-2" onclick="getImport()" data-toggle="modal"
                     data-target="#form-import"><i class="fa fa-sign-in-alt"></i> Import Excel
                 </button>
-                <a type="button" class="btn btn-success mb-2" href="/pemasukanexport">
+                <a type="button" class="btn btn-success mb-2" href="/pemasukan-export">
                     <i class="fa fa-sign-out-alt"></i> Export Excel</a>
                 <a type="button" class="btn btn-danger mb-2" href="/pemasukancetak">
                     <i class="fa fa-file"></i> Export PDF</a>
@@ -28,6 +28,7 @@
                                 <th scope="col">Deskripsi Pemasukan</th>
                                 <th scope="col">Kategori</th>
                                 <th scope="col">Tanggal</th>
+                                 <th scope="col">User</th>
                                 <th scope="col">Jumlah</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Konfirmasi</th>
@@ -42,6 +43,7 @@
                                 <td>{{ $pemasukan->deskripsi }}</td>
                                 <td>{{ $pemasukan->kategori }}</td>
                                 <td>{{ $pemasukan->tanggal }}</td>
+                                <td>{{ $pemasukan->user }}</td>
                                 <td>Rp. {{ $pemasukan->jumlah }}</td>
                                 <td>
                                     @if( $pemasukan->status === 'diterima' )
