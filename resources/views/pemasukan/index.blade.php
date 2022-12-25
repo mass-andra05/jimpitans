@@ -57,15 +57,16 @@
                                         @csrf
                                         <input type="hidden" name="status" value="diterima">
                                         <h5><button class="badge bg-success border-0 text-white"
-                                            onclick="return confirm(' Apakah Kamu Yakin Dengan Ini?')">Terima</button></h5>
+                                                onclick="return confirm(' Apakah Kamu Yakin Dengan Ini?')">Terima</button>
+                                        </h5>
                                     </form>
                                     <form action="/pemasukan/status/{{ $pemasukan->id }}" method="post"
                                         class="d-inline">
                                         @csrf
                                         <input type="hidden" name="status" value="tidak diterima">
                                         <h5><button class="badge bg-danger border-0 text-white"
-                                            onclick="return confirm(' Apakah Kamu Yakin Dengan Ini?')">Tidak
-                                            Diterima</button></h5>
+                                                onclick="return confirm(' Apakah Kamu Yakin Dengan Ini?')">Tidak
+                                                Diterima</button></h5>
                                     </form>
                                     @else
                                     <h5><span class="badge badge-warning text-white">Status Telah Ada</span></h5>
@@ -75,7 +76,13 @@
                                     <span class="d-flex">
                                         <a class="btn btn-circle btn-info border-0 m-1"
                                             href="/pemasukan/{{ $pemasukan->id }}"><i class="fa fa-eye"></i></a>
-                                        <a class="btn btn-circle btn-primary border-0 m-1"
+                                        <a class="btn btn-circle btn-primary border-0 m-1" onclick="getDetail()"
+                                            data-toggle="modal" data-target="#form-detail{{ $pemasukan->id }}"><i
+                                                class="fa fa-eye"></i></a>
+                                        <a class="btn btn-circle btn-primary border-0 m-1" onclick="getEdit()"
+                                            data-toggle="modal" data-target="#form-edit{{ $pemasukan->id }}"><i
+                                                class="fa fa-pen"></i></a>
+                                        <a class="btn btn-circle btn-info border-0 m-1"
                                             href="/pemasukan/{{ $pemasukan->id }}/edit"><i class="fa fa-pen"></i></a>
                                         <form action="/pemasukan/{{ $pemasukan->id }}" method="post" class="d-inline">
                                             @method('DELETE')
@@ -127,4 +134,147 @@
         </div>
     </div>
 </div>
+
+
+<!-- Extra large modal -->
+@foreach( $pemasukans as $pemasukan )
+<div class="modal fade bd-example-modal-md" id="form-edit{{ $pemasukan->id }}" tabindex="-1" role="dialog"
+    aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="judul">Edit {{ $title }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/pemasukan/{{ $pemasukan->id }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Nama</label>
+                        <input type="text" class="form-control" name="judul" id="exampleFormControlInput1"
+                            placeholder="Input..." value="{{ old('judul', $pemasukan->judul) }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Deskripsi</label>
+                        <input type="text" class="form-control" name="deskripsi" id="exampleFormControlInput1"
+                            placeholder="Input..." value="{{ old('deskripsi', $pemasukan->deskripsi) }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Kategori</label>
+                        <input type="text" class="form-control" name="kategori" id="exampleFormControlInput1"
+                            placeholder="Input..." value="{{ old('kategori', $pemasukan->kategori) }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Tanggal</label>
+                        <input type="date" class="form-control" name="tanggal" id="exampleFormControlInput1"
+                            placeholder="Input..." value="{{ old('tanggal', $pemasukan->tanggal) }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">User</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="user"
+                            value="{{ old('user', $pemasukan->user) }}" required disabled>
+                        <input type="hidden" class="form-control" id="exampleFormControlInput1" name="user"
+                            value="{{ old('user', $pemasukan->user) }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Jumlah</label>
+                        <input type="number" class="form-control" name="jumlah" id="exampleFormControlInput1"
+                            placeholder="Input..." value="{{ old('jumlah', $pemasukan->jumlah) }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <a class="btn btn-danger" href="/pemasukan">Kembali</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+
+
+
+<!-- Extra large modal -->
+@foreach( $pemasukans as $pemasukan )
+<div class="modal fade bd-example-modal-md" id="form-detail{{ $pemasukan->id }}" tabindex="-1" role="dialog"
+    aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="judul">Detail {{ $title }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table" width="100%" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <th>Nama Pemasukan</th>
+                            <td>:</td>
+                            <td>{{ $pemasukan->judul }}</td>
+                        </tr>
+                        <tr>
+                            <th>Deskripsi</th>
+                            <td>:</td>
+                            <td>{{ $pemasukan->deskripsi }}</td>
+                        </tr>
+                        <tr>
+                            <th>Kategori</th>
+                            <td>:</td>
+                            <td>{{ $pemasukan->kategori }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tanggal</th>
+                            <td>:</td>
+                            <td>{{ $pemasukan->tanggal }}</td>
+                        </tr>
+                        <tr>
+                            <th>User</th>
+                            <td>:</td>
+                            <td>
+                                <h5><span class="badge badge-primary text-white">{{ $pemasukan->user }}</span></h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Jumlah Pemasukan</th>
+                            <td>:</td>
+                            <td>Rp. {{ $pemasukan->jumlah }}</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>:</td>
+                            <td>
+                                @if( $pemasukan->status === 'diterima' )
+                                <h5><span class="badge badge-success text-white">Diterima</span></h5>
+                                @elseif ( $pemasukan->status === 'tidak diterima' )
+                                <h5><span class="badge badge-danger text-white">Tidak Diterima</span></h5>
+                                @else
+                                <h5><span class="badge badge-warning text-white">Dalam Proses</span></h5>
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Di Input Pada</th>
+                            <td>:</td>
+                            <td>{{ $pemasukan->created_at }}</td>
+                        </tr>
+                        <tr>
+                            <th>Terakhir Update Pada</th>
+                            <td>:</td>
+                            <td>{{ $pemasukan->updated_at }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+
 @endsection

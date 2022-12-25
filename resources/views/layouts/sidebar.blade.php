@@ -29,6 +29,26 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
+        DATA JIMPITAN
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+            aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-download"></i>
+            <span>Pemasukan</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Pemasukan</h6>
+                <a class="collapse-item" href="/pemasukan/kategori">Kategori Pemasukan</a>
+                <a class="collapse-item" href="/pemasukan">Daftar Pemasukan</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
         MASTER DATA
     </div>
 
