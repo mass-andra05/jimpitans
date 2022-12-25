@@ -29,7 +29,7 @@ Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin,petugas,bendahara']], function(){
     Route::get('/home', function () {
-        return view('welcome');
+        return view('dashboard');
     })->middleware('auth');
 
     Route::resource('user', UserController::class);

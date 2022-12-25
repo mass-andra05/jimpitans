@@ -7,12 +7,12 @@
             <div class="card-header py-3">
                 <h3 class="m-0 font-weight-bold text-primary float-left">Data User</h3>
                 <button type="button" class="float-right btn btn-primary btn" onclick="getCreateUser()"
-                    data-toggle="modal" data-target="#form-user"><i class="fa fa-plus"></i> &nbsp; Add User
+                    data-toggle="modal" data-target="#form-user"><i class="fa fa-plus"></i>
                 </button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-custom" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered table-custom" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -20,27 +20,27 @@
                                 <th>Name</th>
                                 <th>Level</th>
                                 <th>Email</th>
-                                <th>Action</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <?php $no = 1 ?>
-                        @foreach($rows as $row)
+                        @foreach($users as $user)
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td>{{ $row->username }}</td>
-                            <td>{{ $row->name }}</td>
-                            <td>{{ $row->level }}</td>
-                            <td>{{ $row->email }}</td>
+                            <td>{{ $user->username }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->level }}</td>
+                            <td>{{ $user->email }}</td>
                             <td class="budget">
                                 <span class="d-flex">
-                                    <a class="btn btn-circle btn-primary border-0 p-2"
-                                        href="{{ route('user.edit', $row) }}"><i class="fas fa-pen"></i></a>&nbsp;
-                                    <form method="POST" action="{{ route('user.destroy', $row) }}">
+                                    <a class="btn btn-circle btn-primary border-0 m-1"
+                                        href="{{ route('user.edit', $user) }}"><i class="fas fa-pen"></i></a>
+                                    <form method="post" action="{{ route('user.destroy', $user) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <span class="btn btn-circle btn-danger border-0 p-2"
+                                        <button class="btn btn-circle btn-danger border-0 m-1"
                                             onclick="return confirm('Yakin Akan Dihapus?')"><i
-                                                class="fas fa-trash"></i></span>
+                                                class="fas fa-trash"></i></button>
                                     </form>
                                 </span>
                             </td>
@@ -87,8 +87,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Status <span class="text-danger">*</span></label>
-                                <select class="form-control" name="level">
-                                    <option selected>Pilih Status</option>
+                                <select class="form-control" name="level" required>
+                                    <option selected value="">Pilih Status</option>
                                     @foreach($levels as $key => $val)
                                     @if($key==old('level'))
                                     <option value="{{ $key }}" selected>{{ $val }}</option>

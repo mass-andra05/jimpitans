@@ -10,20 +10,20 @@
                             @method('patch')
                             @csrf
                             <div class="form-group">
-                                <label for="password">Old Password  <span class="text-danger">*</span></label>
+                                <label for="password">Password Lama <span class="text-danger">*</span></label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                     id="password" name="password" required autofocus>
                                 @error('password')<div class="invalid-feedback">{{ $message }}</div>@enderror
                             </div>
                             <div class="form-group">
-                                <label for="password_baru">New Password  <span class="text-danger">*</span></label>
-                                <input type="password"
-                                    class="form-control @error('password_baru') is-invalid @enderror"
+                                <label for="password_baru">Password Baru<span class="text-danger">*</span></label>
+                                <input type="password" class="form-control @error('password_baru') is-invalid @enderror"
                                     id="password_baru" name="password_baru" required autofocus>
                                 @error('password_baru')<div class="invalid-feedback">{{ $message }}</div>@enderror
                             </div>
                             <div class="form-group">
-                                <label for="konfirmasi_password">Confirmation Password  <span class="text-danger">*</span></label>
+                                <label for="konfirmasi_password">Konfirmasi Password <span
+                                        class="text-danger">*</span></label>
                                 <input type="password"
                                     class="form-control  @error('konfirmasi_password') is-invalid @enderror"
                                     id="konfirmasi_password" name="konfirmasi_password" required autofocus>
@@ -46,7 +46,7 @@
                         <img src="{{ url('bt') }}/img/undraw_profile.svg" width="145px" class="foto-profil">
                     </div>
                     <div class="col-12 mt-3 text-center">
-                        <p class="name">Name : {{ auth()->user()->name }}</p>
+                        <p class="name">Nama : {{ auth()->user()->name }}</p>
                         <p class="level">Level : {{ auth()->user()->level }}</p>
                         <p class="username">Username : {{ auth()->user()->username }}</p>
                         <p class="level">Email : {{ auth()->user()->email }}</p>

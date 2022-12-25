@@ -16,7 +16,7 @@
                 </button>
                 <a type="button" class="btn btn-success mb-2" href="/pemasukan-export">
                     <i class="fa fa-sign-out-alt"></i> Export Excel</a>
-                <a type="button" class="btn btn-danger mb-2" href="/pemasukancetak">
+                <a type="button" class="btn btn-danger mb-2" href="/pemasukan-cetak">
                     <i class="fa fa-file"></i> Export PDF</a>
                 <hr>
                 <div class="table-responsive">
@@ -24,11 +24,9 @@
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Judul Pemasukan</th>
-                                <th scope="col">Deskripsi Pemasukan</th>
-                                <th scope="col">Kategori</th>
+                                <th scope="col">Nama Pemasukan</th>
                                 <th scope="col">Tanggal</th>
-                                 <th scope="col">User</th>
+                                <th scope="col">User</th>
                                 <th scope="col">Jumlah</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Konfirmasi</th>
@@ -40,21 +38,16 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $pemasukan->judul }}</td>
-                                <td>{{ $pemasukan->deskripsi }}</td>
-                                <td>{{ $pemasukan->kategori }}</td>
                                 <td>{{ $pemasukan->tanggal }}</td>
                                 <td>{{ $pemasukan->user }}</td>
                                 <td>Rp. {{ $pemasukan->jumlah }}</td>
                                 <td>
                                     @if( $pemasukan->status === 'diterima' )
-                                    <strong>Terkonfirmasi</strong> <br>
-                                    <span class="badge badge-success" style="color:white; ">Diterima</span>
+                                    <h5><span class="badge badge-success text-white">Diterima</span></h5>
                                     @elseif ( $pemasukan->status === 'tidak diterima' )
-                                    <strong>Tidak Terkonfirmasi</strong> <br>
-                                    <span class="badge badge-danger" style="color:white; ">Tidak Diterima</span>
+                                    <h5><span class="badge badge-danger text-white">Tidak Diterima</span></h5>
                                     @else
-                                    <strong>Dalam Proses</strong><br>
-                                    <span class="badge badge-warning" style="color:white; ">Dalam Proses</span>
+                                    <h5><span class="badge badge-warning text-white">Dalam Proses</span></h5>
                                     @endif
                                 </td>
                                 <td>
@@ -63,40 +56,35 @@
                                         class="d-inline">
                                         @csrf
                                         <input type="hidden" name="status" value="diterima">
-                                        <button class="badge bg-success border-0 color-white"
-                                            onclick="return confirm(' Apakah Kamu Yakin Dengan Ini ')">Terima</button>
+                                        <h5><button class="badge bg-success border-0 text-white"
+                                            onclick="return confirm(' Apakah Kamu Yakin Dengan Ini?')">Terima</button></h5>
                                     </form>
-                                    <br>
                                     <form action="/pemasukan/status/{{ $pemasukan->id }}" method="post"
                                         class="d-inline">
                                         @csrf
                                         <input type="hidden" name="status" value="tidak diterima">
-                                        <button class="badge bg-danger border-0 color-white"
-                                            onclick="return confirm(' Apakah Kamu Yakin Dengan Ini ')">Tidak
-                                            Diterima</button>
+                                        <h5><button class="badge bg-danger border-0 text-white"
+                                            onclick="return confirm(' Apakah Kamu Yakin Dengan Ini?')">Tidak
+                                            Diterima</button></h5>
                                     </form>
                                     @else
-                                    <span class="badge badge-warning" style="color:white; ">Status Telah Ada</span>
+                                    <h5><span class="badge badge-warning text-white">Status Telah Ada</span></h5>
                                     @endif
-                                    <form action="/pemasukan/{{ $pemasukan->id }}" method="post" class="d-inline">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="badge bg-danger border-0 color-white"
-                                            onclick="return confirm(' Apakah Kamu Yakin Untuk Menghapus ')">Delete</button>
-                                    </form>
                                 </td>
-                                <td>
-                                    <a class="btn-sm btn-info border-0 p-2 d-inline"
-                                        href="/pemasukan/{{ $pemasukan->id }}"><i class="fa fa-eye"></i></a>
-                                    <a class="btn-sm btn-primary  border-0 p-2 d-inline"
-                                        href="/pemasukan/{{ $pemasukan->id }}/edit"><i class="fa fa-pen"></i></a>
-                                    <form action="/pemasukan/{{ $pemasukan->id }}" method="post" class="d-inline">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button class="btn-sm btn-danger border-0 p-2"
-                                            onclick="return confirm(' Yakin Akan Dihapus? ')"><i
-                                                class="fa fa-trash"></i></button>
-                                    </form>
+                                <td class="budget">
+                                    <span class="d-flex">
+                                        <a class="btn btn-circle btn-info border-0 m-1"
+                                            href="/pemasukan/{{ $pemasukan->id }}"><i class="fa fa-eye"></i></a>
+                                        <a class="btn btn-circle btn-primary border-0 m-1"
+                                            href="/pemasukan/{{ $pemasukan->id }}/edit"><i class="fa fa-pen"></i></a>
+                                        <form action="/pemasukan/{{ $pemasukan->id }}" method="post" class="d-inline">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button class="btn btn-circle btn-danger border-0 m-1"
+                                                onclick="return confirm(' Apakah Kamu Yakin Akan Dihapus? ')"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </form>
+                                    </span>
                                 </td>
                             </tr>
                             @endforeach

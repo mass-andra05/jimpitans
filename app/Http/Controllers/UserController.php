@@ -17,9 +17,9 @@ class UserController extends Controller
     {
         $data['title'] = 'Data User';
         $data['levels'] = ['admin' => 'admin', 'petugas'=>'petugas','bendahara' => 'bendahara'];
-        $data['rows'] = User::where('name',  'like', '%' . $request->q . '%')->paginate(10);
         return view('user.index', $data,[
-            'title' => "Data User"
+            'title' => "Data User",
+            'users' => User::latest()->get()
         ]);
     }
 
@@ -113,11 +113,6 @@ class UserController extends Controller
         return redirect('user')->with('success', 'Hapus Data Berhasil!');
     }
 
-    // public function setting() {
-    //     $data = array('title' => 'Setting Profil');
-    //     return view('user.setting', $data);
-    // }
-
 
     /**
      * Update the specified resource in storage.
@@ -128,7 +123,7 @@ class UserController extends Controller
 
     public function profil(){
         return view('user.profil',[
-            'title' => "My Profile"
+            'title' => "Profile Saya"
         ]);
     }
 

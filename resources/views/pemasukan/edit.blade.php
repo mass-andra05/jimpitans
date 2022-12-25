@@ -8,12 +8,12 @@
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Judul Pemasukan</label>
+                    <label for="exampleFormControlInput1" class="form-label">Nama</label>
                     <input type="text" class="form-control" name="judul" id="exampleFormControlInput1"
                         placeholder="Input..." value="{{ old('judul', $pemasukan->judul) }}" required>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Deskripsi Pemasukan</label>
+                    <label for="exampleFormControlInput1" class="form-label">Deskripsi</label>
                     <input type="text" class="form-control" name="deskripsi" id="exampleFormControlInput1"
                         placeholder="Input..." value="{{ old('deskripsi', $pemasukan->deskripsi) }}" required>
                 </div>
@@ -23,7 +23,7 @@
                         placeholder="Input..." value="{{ old('kategori', $pemasukan->kategori) }}" required>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Tanggal Pemasukan</label>
+                    <label for="exampleFormControlInput1" class="form-label">Tanggal</label>
                     <input type="date" class="form-control" name="tanggal" id="exampleFormControlInput1"
                         placeholder="Input..." value="{{ old('tanggal', $pemasukan->tanggal) }}" required>
                 </div>
@@ -35,13 +35,13 @@
                         value="{{ old('user', $pemasukan->user) }}" required>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Nominal Pemasukan</label>
+                    <label for="exampleFormControlInput1" class="form-label">Jumlah</label>
                     <input type="number" class="form-control" name="jumlah" id="exampleFormControlInput1"
                         placeholder="Input..." value="{{ old('jumlah', $pemasukan->jumlah) }}" required>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Tambah</button>
-                    <a class="btn btn-danger" href="/pemasukans">Kembali</a>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a class="btn btn-danger" href="/pemasukan">Kembali</a>
                 </div>
             </form>
         </div>
